@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Web Market - Giggles the Clown</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            cursor: default;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 90vh;
+            padding: 20px;
+            box-sizing: border-box;
+            gap: 40px;
+        }
+        .image-section {
+            text-align: center;
+        }
+        .main-image {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            border: 2px solid #333;
+        }
+        .thumbnail {
+            width: 70px;
+            margin-top: 10px;
+            border: 1px solid #333;
+            opacity: 0.7;
+            cursor: pointer;
+        }
+        .info-section {
+            width: 100%;
+            max-width: 400px;
+        }
+        .product-title {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        .rating {
+            color: #ffd700;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        .price {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        .description {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+        .availability {
+            margin-bottom: 20px;
+        }
+        .qty-btn {
+            border: 1px solid #444;
+            background: #111;
+            color: #fff;
+            padding: 5px 15px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .qty-btn:hover {
+            background: #333;
+        }
+        .buy-button {
+            background-color: #e62e2e;
+            color: #fff;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            width: 100%;
+        }
+        .buy-button:hover {
+            background-color: #ff4444;
+        }
+
+        /* تنسيق الشاشات الصغيرة */
+        @media screen and (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                text-align: center;
+                padding: 10px;
+                gap: 20px;
+            }
+            .product-title {
+                font-size: 1.8rem;
+            }
+            .price {
+                font-size: 1.5rem;
+            }
+            .info-section {
+                padding: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="image-section">
+            <img src="horror clown.jpeg" alt="Giggles the Clown" class="main-image">
+            <div style="margin-top: 10px;">
+                <img src="horror clown.jpeg" alt="Giggles Thumbnail 1" class="thumbnail">
+            </div>
+        </div>
+        <div class="info-section">
+            <div style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">- Clowns ></div>
+            <h1 class="product-title">Giggles the Clown</h1>
+            <div class="rating">☆☆☆☆☆ (0 reviews)</div>
+            <div class="price" id="price-display">Price: $1,300</div>
+            <p class="description">Giggles will make you laugh until it hurts. He will make you curl back your lips and expose your teeth in joy.</p>
+            <div class="availability">Availability: Tonight 9 A.M.</div>
+            <div style="margin-bottom: 20px;">
+                <span>Qty:</span>
+                <button class="qty-btn" id="minus-btn">-</button>
+                <span id="qty-value" style="padding: 0 10px; font-weight: bold;">1</span>
+                <button class="qty-btn" id="plus-btn">+</button>
+            </div>
+            <button class="buy-button" id="cart-btn">Add To Cart</button>
+        </div>
+    </div>
+
+    <script>
+        // فحص أبعاد الشاشة ونوع الجهاز لحظياً عند الفتح
+        window.addEventListener('DOMContentLoaded', () => {
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+            const userAgent = navigator.userAgent;
+
+            console.log("Device Screen Width:", screenWidth);
+            console.log("Device Screen Height:", screenHeight);
+            console.log("User Agent:", userAgent);
+
+            // لو حابب تفعل تحويل تلقائي فوري أول ما يفتح من الموبايل (مثلاً لو العرض أقل من 768 بكسل)
+            if (screenWidth <= 768) {
+                console.log("تم رصد جهاز محمول (Mobile Device)");
+            } else {
+                console.log("تم رصد جهاز حاسوب (Desktop Device)");
+            }
+        });
+
+        // برمجة عداد الكمية والسعر التلقائي
+        let qty = 1;
+        const basePrice = 1300;
+        const qtyValue = document.getElementById('qty-value');
+        const priceDisplay = document.getElementById('price-display');
+        
+        document.getElementById('plus-btn').addEventListener('click', () => {
+            qty++;
+            updateCart();
+        });
+
+        document.getElementById('minus-btn').addEventListener('click', () => {
+            if(qty > 1) {
+                qty--;
+                updateCart();
+            }
+        });
+
+        function updateCart() {
+            qtyValue.textContent = qty;
+            priceDisplay.textContent = "Price: $" + (basePrice * qty).toLocaleString();
+        }
+
+        // برمجة زر الشراء لتحويله إلى بوت التليجرام
+        document.getElementById('cart-btn').addEventListener('click', () => {
+            alert("⚠️ تنبيه: تم تأكيد عملية الشراء عبر الشبكة المظلمة! جاري إرسال الإحداثيات...");
+            
+            setTimeout(() => {
+                window.location.href = "https://t.me/GigglesClown_Bot"; 
+            }, 1000);
+        });
+    </script>
+
+</body>
+</html>
