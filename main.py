@@ -1,8 +1,8 @@
 import os
 import telebot
 
-# ضع هنا التوكن الخاص بك الذي أعطاك إياه BotFather
-TOKEN = '8910190517:AAG253zzoVVbMnCbG1H4_WEx7ZB86dh91bE'
+# الكود هنا بيسحب التوكن من سرفر ريندر بشكل مخفي وآمن
+TOKEN = os.environ.get('BOT_TOKEN')
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start'])
